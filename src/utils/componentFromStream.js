@@ -1,12 +1,22 @@
-import { BehaviorSubject } from 'rxjs'
-
 import { Component } from 'react'
+
+import { BehaviorSubject, of } from 'rxjs'
+import { first } from 'rxjs/operators'
 
 export const componentFromStream = mapToDOM => {
 	return class ComponentFromStream extends Component {
 		constructor(...p) {
 			super(...p)
 			this.state = { view: null }
+			let flag = true
+			const $ = of({}).pipe(
+				mapToDOM,
+				first(),
+			).subscribe(view => {
+				if (flag) this.state.view = view
+			})
+			flag = false
+			$.unsubscribe()
 		}
 		componentDidMount() {
 			const props = new BehaviorSubject(this.props)

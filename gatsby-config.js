@@ -1,4 +1,5 @@
 module.exports = {
+	pathPrefix: '/cards-ui-gatsby-test',
 	siteMetadata: {
 		title: 'Cards UI Test',
 	},
