@@ -1,7 +1,7 @@
 import { Component } from 'react'
 
 import { BehaviorSubject, of } from 'rxjs'
-import { first } from 'rxjs/operators'
+// import { first } from 'rxjs/operators'
 
 export const componentFromStream = mapToDOM => {
 	return class ComponentFromStream extends Component {
@@ -11,7 +11,7 @@ export const componentFromStream = mapToDOM => {
 			let flag = true
 			const $ = of({}).pipe(
 				mapToDOM,
-				first(),
+				// first(),
 			).subscribe(view => {
 				if (flag) this.state.view = view
 			})
